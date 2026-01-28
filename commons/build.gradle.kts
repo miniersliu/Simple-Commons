@@ -31,8 +31,12 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
 
     compileOptions {
         val currentJavaVersionFromLibs = JavaVersion.valueOf(libs.versions.app.build.javaVersion.get().toString())
@@ -44,6 +48,10 @@ android {
         kotlinOptions.jvmTarget = project.libs.versions.app.build.kotlinJVMTarget.get()
         kotlinOptions.freeCompilerArgs = listOf(
             "-opt-in=kotlin.RequiresOptIn",
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi",
             "-Xcontext-receivers"
         )
     }
@@ -77,6 +85,9 @@ dependencies {
 
 
     implementation(libs.bundles.lifecycle)
+    implementation(libs.bundles.compose)
+    implementation(libs.compose.view.binding)
+    debugImplementation(libs.bundles.compose.preview)
 
     api(libs.joda.time)
     api(libs.recyclerView.fastScroller)
@@ -88,6 +99,7 @@ dependencies {
     api(libs.material)
     api(libs.gson)
 
+    implementation(libs.glide.compose)
     api(libs.glide)
     ksp(libs.glide.compiler)
 
