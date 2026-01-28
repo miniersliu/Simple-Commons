@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     openTestButton = {
                         ConfirmationDialog(
                             this@MainActivity,
-                            FAKE_VERSION_APP_LABEL,
+                            "Test Dialog",
                             positive = com.simplemobiletools.commons.R.string.ok,
                             negative = 0
                         ) {
